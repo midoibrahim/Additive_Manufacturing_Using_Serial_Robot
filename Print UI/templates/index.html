@@ -1,0 +1,360 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>3D printing Monitoring and Control</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" rel="stylesheet">
+</head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script><!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script>
+  $(document).ready(function () {
+    const config = {
+      type: 'line',
+      data: {
+        labels: [],
+        datasets: [{
+          label: "Temperature Readings",
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: [],
+          fill: false,
+        }],
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Real-Time Temperature'
+        },
+        tooltips: {
+          mode: 'index',
+          intersect: false,
+        },
+        hover: {
+          mode: 'nearest',
+          intersect: true
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Time'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Value'
+            }
+          }]
+        }
+      }
+    };
+
+    const context = document.getElementById('canvas').getContext('2d');
+
+    const lineChart = new Chart(context, config);
+
+    const source = new EventSource("/chart-data");
+
+    source.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      if (config.data.labels.length === 10) {
+        config.data.labels.shift();
+        config.data.datasets[0].data.shift();
+      }
+      config.data.labels.push(data.time);
+      config.data.datasets[0].data.push(data.value);
+      lineChart.update();
+    }
+  });
+</script>
+
+<header>
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <!-- Slide One - Set the background image for this slide in the line below -->
+      <div class="carousel-item active" style="background-image:url('https://i.ibb.co/K5C4mzm/Picture1.jpg')">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="display-4">IRB120</h2>
+          <p class="lead">Robot in environment</p>
+        </div>
+      </div>
+      <!-- Slide Two - Set the background image for this slide in the line below -->
+      <div class="carousel-item"
+        style="background-image: url('https://i.ibb.co/gFVjBBr/Screenshot-2022-04-24-094508.png')">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="display-4">IRB120</h2>
+          <p class="lead">Robot in environment</p>
+        </div>
+      </div>
+      <!-- Slide Three - Set the background image for this slide in the line below -->
+      <div class="carousel-item"
+        style="background-image: url('https://i.ibb.co/02m29fh/Picture2.jpg')">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="display-4">IRB120</h2>
+          <p class="lead">Robot mid print</p>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  </div>
+</header>
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+    particlesJS.load("particles-js", "{{ url_for('static', filename='json/index.json') }}",
+    function(){
+    console.log("particles.json has loaded");
+});
+</script>
+<div id="particles-js"></div>
+<div class=container2">
+  <img src="{{ url_for('video_feed') }}" alt="Live Feed" width="60%" height="80%" style="float:right">
+  <h1 class="mt-5">
+    <FONT COLOR="#6c5ce7" allign="center">3D printing Monitoring and Control</FONT>
+  </h1>
+  <form method="post" action="{{ url_for('tasks') }}">
+    <div class="game-board">
+        <button type="submit" name="stop" value="Stop/Start"><img
+          src="https://img.icons8.com/bubbles/100/000000/play.png" height="100" width="100"></button>
+        <button type="submit" name="click" value="Capture"><img
+            src="https://img.icons8.com/bubbles/100/000000/aperture.png" height="100" width="100"></button>
+        <button type="submit" value="Start/Stop Recording" name="rec"><img
+            src="https://img.icons8.com/bubbles/100/000000/clapperboard.png" height="100" width="100"></button>
+        <div class="box"><button type="submit" value="Pause" name="pause"><img
+              src="https://img.icons8.com/bubbles/100/000000/3d-printer.png" height="100" width="100"></button></div>
+        <div class="box"><button type="submit" value="Home" name="home"><img
+              src="https://img.icons8.com/bubbles/100/000000/home-button.png"
+              alt="Home" height="100" width="100"></button></div>
+        <div class="box"><button type="submit" value="Delete" name="delete"><img
+              src="https://img.icons8.com/bubbles/100/000000/delete-forever.png" alt="Delete" height="100"
+              width="100"></button></div>
+        <div class="box"><button type="submit" value="Upx" name="upx"><img
+              src="https://img.icons8.com/bubbles/100/000000/up.png" alt="+Y" height="100"
+              width="100"></button></div>
+        <div class="box"><button type="submit" value="Upy" name="upy"><img
+              src="https://img.icons8.com/bubbles/100/000000/up.png" alt="+Y" height="100"
+              width="100"></button></div>
+        <div class="box"><button type="submit" value="Upz" name="upz"><img
+              src="https://img.icons8.com/bubbles/100/000000/up.png" alt="+Y" height="100"
+              width="100"></button></div>
+        <div class="box"><button type="submit" value="Downx" name="downx"><img
+              src="https://img.icons8.com/bubbles/100/000000/down.png" alt="-Y" height="100"
+              width="100"></button></div>
+        <div class="box"><button type="submit" value="Downy" name="downy"><img
+              src="https://img.icons8.com/bubbles/100/000000/down.png" alt="-Y" height="100"
+              width="100"></button></div>
+        <div class="box"><button type="submit" value="Downz" name="downz"><img
+              src="https://img.icons8.com/bubbles/100/000000/down.png" alt="-Y" height="100"
+              width="100"></button></div>
+      <div class="box">
+        <h2>X axis</h2>
+      </div>
+      <div class="box">
+        <h2>Y axis</h2>
+      </div>
+      <div class="box">
+        <h2>Z axis</h2>
+      </div>
+    </div>
+    <P>
+      <h2>Increment Value</h2>
+    </P>
+    <input type="number" name="inc" value="{{inc}}" placeholder="Incremental value">
+    <class="error">
+      <FONT COLOR="RED" style="float:right">
+        <h1>Status: <span id="error"></span></h1>
+      </FONT>
+      <p></p>
+      <label>Loading progress:</label>
+      <div class="progress" style="width: 30%; margin: 5px;">
+        <div class="progress-bar progress-bar-striped active" id="1" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+          aria-valuemax="100" style="width: 0%">
+          <span class="progress-bar-label">0%</span>
+        </div>
+      </div>
+    </class>
+      <label>Printing progress:</label>
+      <div class="progress" style="width: 30%; margin: 5px;">
+        <div class="progress-bar progress-bar-striped active" id="2" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+          aria-valuemax="100" style="width: 0%">
+          <span class="progress-bar-label2">0%</span>
+        </div>
+      </div>
+      <div class="col-6" style="float:right">
+        <div class="card">
+          <div class="card-body">
+            <canvas id="canvas""></canvas>
+            </div>
+        </div>
+    </div>
+    <p>
+        <h2>Upload G-code file</h2>
+    </p>
+    <form action=" http://localhost:5000/uploader" method="POST" enctype="multipart/form-data">
+              <input type="file" name="file" style="color:white" />
+              <input type="submit" value="Upload" />
+              <p>
+                <h2>Select G-code & Print Modes</h2>
+              </p>
+  </form>
+  <form action="http://localhost:5000/selector" method="POST" enctype="multipart/form-data">
+    <select name=gcodefile method="GET" action="/">
+      {% for file in files_obj %}
+      <option value="{{file}}" SELECTED>{{file}}</option>"
+      {% endfor %}
+    </select>
+    <input type="submit" value="Select and Start" />
+    <p></p>
+    <input type="checkbox" name="mode" value="runandload">
+    <FONT COLOR="#6c5ce7" style="font-size:20pt">Run and Load</FONT>
+    <p></p>
+    <input type="checkbox" name="mode" value="runonrobot">
+    <FONT COLOR="#6c5ce7" style="font-size:20pt">Run on Robot</FONT>
+  </form>
+  <h3 style="font-family:courier; color:white">Instructions:</h3>
+  <ol style="font-family:courier; color:white">
+    <li>Stop/Start--Toggle between stop or start live streaming</li>
+    <li>Capture--Take still-shot and save in the 'shots' directory</li>
+    <li>Start/Stop Recording--Toggle between starting and stopping video recording</li>
+    <li>Jog Robot in XYZ direction</li>
+    <li>Upload and Select G-code</li>
+  </ol>
+  <header class="text-center py-2 mb-4">
+    <div class="container">
+      <h1 class="font-weight-light text-white">
+        <marquee direction="right">Meet the Team</marquee>
+      </h1>
+    </div>
+  </header>
+  </class>
+  </form>
+</div>
+</div>
+{% block modal %}{% endblock %}
+{% block script %}{% endblock %}
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <!-- Team Member 1 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://i.ibb.co/z59s6dv/se7s.jpg" class="card-img-top" alt="..." style="width:255px;height:300px;">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Ahmed Hussein</h5>
+          <div class="card-text text-black-50">17P8155</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 2 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://i.ibb.co/r5mhFYt/ima.jpg" class="card-img-top" alt="..." style="width:255px;height:300px;">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Mohamed Ibrahim</h5>
+          <div class="card-text text-black-50">17P8171</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 3 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://i.ibb.co/DRSMdC6/rafio.jpg" class="card-img-top" alt="..." style="width:255px;height:300px;">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Rafik Emad</h5>
+          <div class="card-text text-black-50">17P8253</div>
+        </div>
+      </div>
+    </div>
+    <!-- Team Member 4 -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-0 shadow">
+        <img src="https://i.ibb.co/Y3JFmmV/duk.jpg" class="card-img-top" alt="..." style="width:255px;height:300px;">
+        <div class="card-body text-center">
+          <h5 class="card-title mb-0">Ali Essam</h5>
+          <div class="card-text text-black-50">17P8220</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <!-- Team Member 1 -->
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-0 shadow">
+          <img src="https://i.ibb.co/1Zn18Wt/drew.jpg" class="card-img-top" alt="..." style="width:247px;height:300px;">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Andrew Abdelmasieh</h5>
+            <div class="card-text text-black-50">17P8165</div>
+          </div>
+        </div>
+      </div>
+      <!-- Team Member 1 -->
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-0 shadow">
+          <img src="https://i.ibb.co/dKqwwGX/momo.jpg" class="card-img-top" alt="..." style="width:247px;height:300px;">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Ahmad Mohamed</h5>
+            <div class="card-text text-black-50">17P8164</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-md-6 mb-3">
+        <div class="card border-0 shadow">
+          <img src="https://i.ibb.co/Lhrzh6N/asraf.jpg" class="card-img-top" alt="..." style="width:248px;height:300px;">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">Mohammed Ashraf</h5>
+            <div class="card-text text-black-50">17P8049</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  var source = new EventSource("/progress");
+  source.onmessage = function (event) {
+    $('#1').css('width', event.data + '%').attr('aria-valuenow', event.data);
+    $('.progress-bar-label').text(event.data + '%');
+
+    // if (event.data == 100) {
+    //   source.close()
+    // }
+  }
+  var source = new EventSource("/progress2");
+  source.onmessage = function (event) {
+    $('#2').css('width', event.data + '%').attr('aria-valuenow', event.data);
+    $('.progress-bar-label2').text(event.data + '%');
+
+    // if (event.data == 100) {
+    //   source.close()
+    // }
+  }
+  var source = new EventSource("/status");
+  source.onmessage = function (event) {
+    document.getElementById("error").innerText = event.data;
+  }
+</script>

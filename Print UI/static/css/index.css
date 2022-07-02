@@ -1,0 +1,237 @@
+canvas {
+  display: block;
+}
+
+#particles-js {
+  position: absolute;
+  top: 530px;
+  width: 1519px;
+  height: 2350px;
+  background: #001a33;
+  z-index: -10;
+  overflow: hidden;
+}
+
+a,
+a:visited {
+  color: #e34234;
+  transition: 0.25s;
+}
+
+a:hover,
+a:focus {
+  color: #ba160c;
+}
+
+.game-board {
+  display: grid;
+  grid-template-rows: 120px 120px 120px;
+  grid-template-columns: 120px 120px 120px;
+  position: relative;
+  z-index: 1;
+}
+
+canvas {
+  background-color: transparent;
+  background: transparent;
+}
+
+button {
+  background-color: transparent;
+  background: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+body {
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.bg-1 {
+  background-color: #1abc9c;
+  /* Green */
+  color: #ffffff;
+}
+
+.box {
+  background: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  color: none;
+  vertical-align: middle;
+  font-size: 16pt;
+  text-align: center;
+}
+
+.heading {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  font: normal 76px/1 "amaranth", Helvetica, sans-serif;
+  color: #0f4366;
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.enjoy-css {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 160px;
+  padding: 20px;
+  overflow: hidden;
+  border: none;
+  -webkit-border-radius: 27px;
+  border-radius: 27px;
+  font: normal 21px/1 "Times New Roman", Times, serif;
+  color: rgba(255, 255, 255, 1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: -webkit-radial-gradient(circle, rgba(34, 98, 150, 1) 0, rgba(34, 98, 150, 1) 81%, rgba(0, 26, 58, 1) 100%);
+  background: -moz-radial-gradient(circle, rgba(34, 98, 150, 1) 0, rgba(34, 98, 150, 1) 81%, rgba(0, 26, 58, 1) 100%);
+  background: radial-gradient(circle, rgba(34, 98, 150, 1) 0, rgba(34, 98, 150, 1) 81%, rgba(0, 26, 58, 1) 100%);
+  background-position: 50% 50%;
+  -webkit-background-origin: padding-box;
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: auto auto;
+  background-size: auto auto;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-item {
+  height: fit-content;
+  min-height: 530px;
+  background: no-repeat center center scroll;
+  background-size: cover;
+}
+
+section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.lnr {
+  display: inline-block;
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.05em;
+  stroke-width: 1;
+}
+
+.services-icon {
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+
+bgc2,
+.vLine,
+.hLine {
+  background-color: #0F52BA;
+}
+
+.quote-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.services-icon {
+  font-size: 60px;
+  margin-left: 2rem;
+}
+
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
+h2 {
+  color: white
+}
+
+label {
+  color: white
+}
+
+container2 {
+  position: relative;
+  z-index: 1;
+}
+
+row {
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  position: relative;
+  z-index: 1;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+input[type=file]::file-selector-button {
+  border: 3px solid #6c5ce7;
+  /*   background-color:transparent; */
+  color: white;
+  background-color: #6c5ce7;
+  padding: .2em .4em;
+  border-radius: 100px;
+  font-size: 18px;
+}
+
+input[type=submit] {
+  border: 3px solid #6c5ce7;
+  /*   background-color:transparent; */
+  color: white;
+  background-color: #6c5ce7;
+  padding: .2em .4em;
+  border-radius: 100px;
+  font-size: 18px;
+}
+
+/* input[type=file]::file-selector-button:hover {
+background-color:#6c5ce7;
+border: 5px;
+  padding: .2em .4em;
+border-radius: .2em;
+transition: 1s;
+} */
+select {
+  margin: 50px;
+  border-radius: 100px;
+  color: white;
+  background-color: #6c5ce7;
+  width: 200px;
+  padding: 5px 35px 5px 5px;
+  font-size: 16px;
+  border: 1px solid #CCC;
+  height: 38px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /*   background: url(https://stackoverflow.com/favicon.ico) 96% / 15% no-repeat #EEE; */
+}
+
+select::-ms-expand {
+  display: none;
+  /* Remove default arrow in Internet Explorer 10 and 11 */
+}
+
+.hide{
+  display: none; 
+}
+
+.show{
+  display: block;
+}

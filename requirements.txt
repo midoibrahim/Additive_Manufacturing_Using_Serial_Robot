@@ -1,0 +1,13 @@
+Flask==2.0.3
+matplotlib==3.5.1
+mediapipe==0.8.10.1
+numpy==1.21.5
+opencv_python==4.5.5.64
+Printrun==2.0.0rc7
+pyrealsense2==2.50.0.3812
+requests==2.27.1
+robodk==5.3.1
+viztracer==0.14.4
+Werkzeug==2.0.3
+wxPython==4.1.1
+torch==1.12.0

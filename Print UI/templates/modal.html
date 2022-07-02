@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+ {% block modal%}
+ <div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal" show="True">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Spaghetti detected</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <!-- Modal body -->
+          <div class="modal-body">
+            <b>Spaghetti detected </b>
+            <br>
+            Select action to perform:
+          </div>
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <form action="http://localhost:5000/resumespa" method="POST" enctype="multipart/form-data">
+            <button type="submit" class="btn btn-default" data-dismiss="modal" onclick="confirmDelete()">Continue</button>
+          </form>
+          <form action="http://localhost:5000/pausespa" method="POST" enctype="multipart/form-data">
+            <button type="submit" class="btn btn-danger" onclick="confirmDelete()">Stop</button>
+        </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script>
+      function confirmDelete(){
+      console.log("Deleting...");
+      $('#myModal').modal('hide');
+    }
+
+    </script>
+ {% endblock %}
+
+ {% block script %}
+<script>
+$(document).ready(function(){
+    console.log("window open")
+    $('.confirm-delete').addClass('hide');
+      $('#myModal .modal-header, .modal-footer, .modal-body').removeClass('hide');    
+    $('#myModal').modal('show');
+    setTimeout(function(){$('#myModal').modal('hide')},60000);
+})
+</script>
+
+ {% endblock %}
