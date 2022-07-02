@@ -7,7 +7,6 @@ This is a 3D Printing project using 6 DOF serial robot **ABB IRB120** based on:
 - Yolov5
 
 
-
 ## Features
 1. Pronterface UI to allow interaction, viewing logs and sensor reading
 2. Printing Process Simulation using Robodk environment
