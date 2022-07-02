@@ -4,7 +4,7 @@ This is a 3D Printing project using 6 DOF serial robot **ABB IRB120** based on:
 - Robodk Simulation Program
 - Pronterface 
 - Flask 
-- Yolo v5
+- Yolov5
 
 
 
@@ -23,9 +23,8 @@ This is a 3D Printing project using 6 DOF serial robot **ABB IRB120** based on:
 
 [![Watch The video on Youtube](https://user-images.githubusercontent.com/63561949/176980942-0f3024e0-333e-485e-a077-0c5f80ac4584.png)](https://youtu.be/_tG_Xn9Keio)
 
-
 ## Meet The Team
-![Picture1](https://user-images.githubusercontent.com/63561949/176978481-776ff909-ff31-44c9-96b6-869b1606b3a5.png)
+![team](https://user-images.githubusercontent.com/102156303/177007280-ac90bae1-2bf9-4493-b246-e5951f461561.png)
 
 ## How To Use 
 1. Install Robodk from [Here](https://robodk.com/download)
